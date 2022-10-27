@@ -9,7 +9,6 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +20,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 
 enum Tipo {
@@ -124,6 +125,7 @@ public class EmailController implements Initializable {
 	
 	private void enviarPanel(Tipo tipo) {
 		Alert a;
+		Stage alertStage;
 		if(tipo == Tipo.EXITO) {
 			errorMSG = "";
 			a = new Alert(AlertType.INFORMATION);
@@ -135,6 +137,8 @@ public class EmailController implements Initializable {
 			a.setHeaderText("No se pudo enviar el email.");
 			a.setContentText(errorMSG);
 		}
+		alertStage = (Stage) a.getDialogPane().getScene().getWindow();
+		alertStage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/email-send-icon-32x32.png")));
 		a.show();
 	}
 	
